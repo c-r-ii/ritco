@@ -1,0 +1,296 @@
+{
+  "last_updated": "2026-09-01 17:23:03",
+  "region": "서울특별시",
+  "unit": "원/L (VAT 포함)",
+  "source": "한국석유공사 오피넷 (Opinet)",
+  "history": [
+    {
+      "period": "2024.01",
+      "display_name": "2024.01 평균가격",
+      "year": 2024,
+      "month": 1,
+      "gasoline": 1643.37,
+      "diesel": 1568.06,
+      "lpg": 1028.39
+    },
+    {
+      "period": "2024.02",
+      "display_name": "2024.02 평균가격",
+      "year": 2024,
+      "month": 2,
+      "gasoline": 1699.49,
+      "diesel": 1611.32,
+      "lpg": 1028.24
+    },
+    {
+      "period": "2024.03",
+      "display_name": "2024.03 평균가격",
+      "year": 2024,
+      "month": 3,
+      "gasoline": 1716.28,
+      "diesel": 1623.32,
+      "lpg": 1027.99
+    },
+    {
+      "period": "2024.04",
+      "display_name": "2024.04 평균가격",
+      "year": 2024,
+      "month": 4,
+      "gasoline": 1762.31,
+      "diesel": 1641.57,
+      "lpg": 1028.02
+    },
+    {
+      "period": "2024.05",
+      "display_name": "2024.05 평균가격",
+      "year": 2024,
+      "month": 5,
+      "gasoline": 1763.77,
+      "diesel": 1627.24,
+      "lpg": 1028.09
+    },
+    {
+      "period": "2024.06",
+      "display_name": "2024.06 평균가격",
+      "year": 2024,
+      "month": 6,
+      "gasoline": 1718.99,
+      "diesel": 1580.46,
+      "lpg": 1027.78
+    },
+    {
+      "period": "2024.07",
+      "display_name": "2024.07 평균가격",
+      "year": 2024,
+      "month": 7,
+      "gasoline": 1774.36,
+      "diesel": 1637.64,
+      "lpg": 1040.79
+    },
+    {
+      "period": "2024.08",
+      "display_name": "2024.08 평균가격",
+      "year": 2024,
+      "month": 8,
+      "gasoline": 1751.89,
+      "diesel": 1615.62,
+      "lpg": 1075.98
+    },
+    {
+      "period": "2024.09",
+      "display_name": "2024.09 평균가격",
+      "year": 2024,
+      "month": 9,
+      "gasoline": 1686.26,
+      "diesel": 1544.18,
+      "lpg": 1076.15
+    },
+    {
+      "period": "2024.10",
+      "display_name": "2024.10 평균가격",
+      "year": 2024,
+      "month": 10,
+      "gasoline": 1659.71,
+      "diesel": 1511.46,
+      "lpg": 1076.04
+    },
+    {
+      "period": "2024.11",
+      "display_name": "2024.11 평균가격",
+      "year": 2024,
+      "month": 11,
+      "gasoline": 1697.97,
+      "diesel": 1552.6,
+      "lpg": 1090.09
+    },
+    {
+      "period": "2024.12",
+      "display_name": "2024.12 평균가격",
+      "year": 2024,
+      "month": 12,
+      "gasoline": 1714.1,
+      "diesel": 1576.73,
+      "lpg": 1119.02
+    },
+    {
+      "period": "2025.01",
+      "display_name": "2025.01 평균가격",
+      "year": 2025,
+      "month": 1,
+      "gasoline": 1776.75,
+      "diesel": 1643.45,
+      "lpg": 1119.11
+    },
+    {
+      "period": "2025.02",
+      "display_name": "2025.02 평균가격",
+      "year": 2025,
+      "month": 2,
+      "gasoline": 1791.0,
+      "diesel": 1665.71,
+      "lpg": 1134.07
+    },
+    {
+      "period": "2025.03",
+      "display_name": "2025.03 평균가격",
+      "year": 2025,
+      "month": 3,
+      "gasoline": 1747.02,
+      "diesel": 1625.31,
+      "lpg": 1134.16
+    },
+    {
+      "period": "2025.04",
+      "display_name": "2025.04 평균가격",
+      "year": 2025,
+      "month": 4,
+      "gasoline": 1711.84,
+      "diesel": 1592.64,
+      "lpg": 1134.08
+    },
+    {
+      "period": "2025.05",
+      "display_name": "2025.05 평균가격",
+      "year": 2025,
+      "month": 5,
+      "gasoline": 1709.48,
+      "diesel": 1592.06,
+      "lpg": 1150.32
+    },
+    {
+      "period": "2025.06",
+      "display_name": "2025.06 평균가격",
+      "year": 2025,
+      "month": 6,
+      "gasoline": 1714.58,
+      "diesel": 1593.57,
+      "lpg": 1133.85
+    },
+    {
+      "period": "2025.07",
+      "display_name": "2025.07 평균가격",
+      "year": 2025,
+      "month": 7,
+      "gasoline": 1738.73,
+      "diesel": 1618.38,
+      "lpg": 1110.96
+    },
+    {
+      "period": "2025.08",
+      "display_name": "2025.08 평균가격",
+      "year": 2025,
+      "month": 8,
+      "gasoline": 1732.12,
+      "diesel": 1614.59,
+      "lpg": 1093.57
+    },
+    {
+      "period": "2025.09",
+      "display_name": "2025.09 평균가격",
+      "year": 2025,
+      "month": 9,
+      "gasoline": 1720.79,
+      "diesel": 1604.3,
+      "lpg": 1052.92
+    },
+    {
+      "period": "2025.10",
+      "display_name": "2025.10 평균가격",
+      "year": 2025,
+      "month": 10,
+      "gasoline": 1724.33,
+      "diesel": 1610.52,
+      "lpg": 1053.06
+    },
+    {
+      "period": "2025.11",
+      "display_name": "2025.11 평균가격",
+      "year": 2025,
+      "month": 11,
+      "gasoline": 1787.7,
+      "diesel": 1693.34,
+      "lpg": 1053.04
+    },
+    {
+      "period": "2025.12",
+      "display_name": "2025.12 평균가격",
+      "year": 2025,
+      "month": 12,
+      "gasoline": 1802.42,
+      "diesel": 1712.71,
+      "lpg": 1053.11
+    },
+    {
+      "period": "2026.01",
+      "display_name": "2026.01 평균가격",
+      "year": 2026,
+      "month": 1,
+      "gasoline": 1762.96,
+      "diesel": 1665.54,
+      "lpg": 1052.96
+    },
+    {
+      "period": "2026.02",
+      "display_name": "2026.02 평균가격",
+      "year": 2026,
+      "month": 2,
+      "gasoline": 1750.0,
+      "diesel": 1657.69,
+      "lpg": 1053.14
+    },
+    {
+      "period": "2026.03",
+      "display_name": "2026.03 평균가격",
+      "year": 2026,
+      "month": 3,
+      "gasoline": 1875.81,
+      "diesel": 1862.51,
+      "lpg": 1068.32
+    },
+    {
+      "period": "2026.04",
+      "display_name": "2026.04 평균가격",
+      "year": 2026,
+      "month": 4,
+      "gasoline": 2021.6,
+      "diesel": 2005.46,
+      "lpg": 1096.9
+    },
+    {
+      "period": "2026.05",
+      "display_name": "2026.05 평균가격",
+      "year": 2026,
+      "month": 5,
+      "gasoline": 2051.1,
+      "diesel": 2038.85,
+      "lpg": 1148.5
+    },
+    {
+      "period": "2026.06",
+      "display_name": "2026.06 평균가격",
+      "year": 2026,
+      "month": 6,
+      "gasoline": 2044.51,
+      "diesel": 2032.56,
+      "lpg": 1166.04
+    },
+    {
+      "period": "2026.07",
+      "display_name": "2026.07 평균가격",
+      "year": 2026,
+      "month": 7,
+      "gasoline": 1918.53,
+      "diesel": 1899.03,
+      "lpg": 1193.34
+    },
+    {
+      "period": "2026.08",
+      "display_name": "2026.08 평균가격",
+      "year": 2026,
+      "month": 8,
+      "gasoline": 1908.7,
+      "diesel": 1887.05,
+      "lpg": 1156.47
+    }
+  ]
+}

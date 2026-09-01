@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서울지역 유가 통계 대시보드 | 오피넷 월간 평균가격</title>
+  <meta name="description" content="한국석유공사 오피넷(Opinet) 서울지역 보통휘발유, 자동차용경유, 자동차부탄 월간 평균판매가격 실시간 통계 및 게시판 복사 대시보드">
+  
+  <!-- Google Fonts: Pretendard & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navbar / Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-badge">
+          <svg class="icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="header-title">서울지역 유가 통계 대시보드</h1>
+          <p class="header-subtitle">오피넷(Opinet) 주유소·충전소 월간 평균 판매가격 (VAT 포함)</p>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="live-indicator">
+          <span class="pulse-dot"></span>
+          <span class="live-text" id="lastUpdatedText">매월 1일 자동 갱신됨</span>
+        </div>
+        
+        <button id="themeToggleBtn" class="btn-icon" title="다크/라이트 모드 전환" aria-label="테마 전환">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button id="quickCopyLatestBtn" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>최신월 게시판 복사</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- KPI Summary Cards -->
+    <section class="kpi-grid">
+      <!-- Gasoline Card -->
+      <div class="kpi-card gasoline-card">
+        <div class="kpi-header">
+          <div class="kpi-tag tag-gasoline">보통휘발유</div>
+          <span class="kpi-month" id="latestMonthGasolineTag">최신월</span>
+        </div>
+        <div class="kpi-body">
+          <div class="kpi-price">
+            <span class="price-value" id="kpiGasolinePrice">-</span>
+            <span class="price-unit">원/L</span>
+          </div>
+          <div class="kpi-change" id="kpiGasolineChange">
+            <span class="change-pill">-</span>
+            <span class="change-desc">전월 대비</span>
+          </div>
+        </div>
+        <div class="kpi-footer">
+          <span>연중 최고 <strong id="kpiGasolineMax">-</strong></span>
+          <span>연중 최저 <strong id="kpiGasolineMin">-</strong></span>
+        </div>
+      </div>
+
+      <!-- Diesel Card -->
+      <div class="kpi-card diesel-card">
+        <div class="kpi-header">
+          <div class="kpi-tag tag-diesel">자동차용경유</div>
+          <span class="kpi-month" id="latestMonthDieselTag">최신월</span>
+        </div>
+        <div class="kpi-body">
+          <div class="kpi-price">
+            <span class="price-value" id="kpiDieselPrice">-</span>
+            <span class="price-unit">원/L</span>
+          </div>
+          <div class="kpi-change" id="kpiDieselChange">
+            <span class="change-pill">-</span>
+            <span class="change-desc">전월 대비</span>
+          </div>
+        </div>
+        <div class="kpi-footer">
+          <span>연중 최고 <strong id="kpiDieselMax">-</strong></span>
+          <span>연중 최저 <strong id="kpiDieselMin">-</strong></span>
+        </div>
+      </div>
+
+      <!-- LPG Card -->
+      <div class="kpi-card lpg-card">
+        <div class="kpi-header">
+          <div class="kpi-tag tag-lpg">자동차부탄 (LPG)</div>
+          <span class="kpi-month" id="latestMonthLpgTag">최신월</span>
+        </div>
+        <div class="kpi-body">
+          <div class="kpi-price">
+            <span class="price-value" id="kpiLpgPrice">-</span>
+            <span class="price-unit">원/L</span>
+          </div>
+          <div class="kpi-change" id="kpiLpgChange">
+            <span class="change-pill">-</span>
+            <span class="change-desc">전월 대비</span>
+          </div>
+        </div>
+        <div class="kpi-footer">
+          <span>연중 최고 <strong id="kpiLpgMax">-</strong></span>
+          <span>연중 최저 <strong id="kpiLpgMin">-</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Grid: Chart & Actions -->
+    <section class="card chart-section">
+      <div class="card-header">
+        <div class="card-header-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-md">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <h2>월간 유가 변동 추이</h2>
+        </div>
+        <div class="chart-controls">
+          <div class="filter-group" id="yearFilterGroup">
+            <button class="filter-pill active" data-year="ALL">전체</button>
+            <button class="filter-pill" data-year="2026">2026년</button>
+            <button class="filter-pill" data-year="2025">2025년</button>
+            <button class="filter-pill" data-year="2024">2024년</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="fuelChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Table Section -->
+    <section class="card table-section">
+      <div class="card-header">
+        <div class="card-header-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-md">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <h2>월별 상세 통계표</h2>
+          <span class="count-badge" id="tableCountBadge">총 0건</span>
+        </div>
+        <div class="table-actions">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm search-icon">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="searchInput" placeholder="연도 또는 월 검색 (예: 2026.05)...">
+          </div>
+          <button id="downloadCsvBtn" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>CSV 저장</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="custom-table" id="dataTable">
+          <thead>
+            <tr>
+              <th scope="col" class="th-center sortable" data-sort="period">구분 <span class="sort-icon">↕</span></th>
+              <th scope="col" class="th-right sortable" data-sort="gasoline">보통휘발유 (원/L) <span class="sort-icon">↕</span></th>
+              <th scope="col" class="th-right sortable" data-sort="diesel">자동차용경유 (원/L) <span class="sort-icon">↕</span></th>
+              <th scope="col" class="th-right sortable" data-sort="lpg">자동차부탄 (원/L) <span class="sort-icon">↕</span></th>
+              <th scope="col" class="th-center">게시판 복사</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>📊 데이터 출처: <strong>한국석유공사 오피넷(Opinet)</strong> | 국내유가통계 > 주유소/자동차충전소 > 평균판매가격 (서울지역, VAT 포함)</p>
+        <p class="footer-sub">매월 1일 GitHub Actions에 의해 자동으로 새로운 월 데이터가 추가됩니다.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Copy Modal -->
+  <div class="modal-overlay" id="copyModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-md text-primary">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <h3 id="modalTitle">게시판 복사</h3>
+        </div>
+        <button class="modal-close" id="modalCloseBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="tab-options">
+          <button class="tab-btn active" data-tab="format-post">📌 게시글 본문형</button>
+          <button class="tab-btn" data-tab="format-markdown">📋 마크다운 표</button>
+          <button class="tab-btn" data-tab="format-text">📝 일반 텍스트</button>
+        </div>
+        <textarea id="copyPreviewTextarea" class="copy-textarea" readonly rows="8"></textarea>
+      </div>
+      <div class="modal-footer">
+        <span class="copy-hint">클릭 한 번으로 클립보드에 복사됩니다.</span>
+        <button id="modalConfirmCopyBtn" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>클립보드에 복사</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm toast-icon">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <span id="toastMessage">클립보드에 복사되었습니다!</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
