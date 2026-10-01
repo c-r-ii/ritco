@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-01 17:23:03",
+  "last_updated": "2026-10-01 03:01:48",
   "region": "서울특별시",
   "unit": "원/L (VAT 포함)",
   "source": "한국석유공사 오피넷 (Opinet)",
@@ -291,6 +291,15 @@
       "gasoline": 1908.7,
       "diesel": 1887.05,
       "lpg": 1156.47
+    },
+    {
+      "period": "2026.09",
+      "display_name": "2026.09 평균가격",
+      "year": 2026,
+      "month": 9,
+      "gasoline": 1904.72,
+      "diesel": 1886.33,
+      "lpg": 1156.13
     }
   ]
 }
