@@ -255,10 +255,9 @@ function getChartData() {
   return fuelData.filter(d => d.year === parseInt(currentYearFilter, 10));
 }
 
-// Table Data
+// Table Data: 최근 갱신일 기준 작년 1월부터 최근 갱신월까지 표시
 function getTableData() {
-  if (currentYearFilter === 'ALL') return fuelData;
-  return fuelData.filter(d => d.year === parseInt(currentYearFilter, 10));
+  return getChartData();
 }
 
 function renderChart() {
