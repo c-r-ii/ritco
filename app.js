@@ -78,6 +78,7 @@ async function loadData() {
     }
 
     renderKPIs();
+    renderYearFilters();
     renderChart();
     renderTable();
   } catch (err) {
@@ -229,15 +230,40 @@ function renderChangeBadge(element, currentVal, prevVal) {
   `;
 }
 
-// Chart.js Setup & Rendering
-function getFilteredData() {
+// Render dynamic year filter pills based on latest year in data
+function renderYearFilters() {
+  if (fuelData.length === 0) return;
+  const latestYear = Math.max(...fuelData.map(d => d.year));
+  const prevYear = latestYear - 1;
+
+  yearFilterGroup.innerHTML = `
+    <button class="filter-pill ${currentYearFilter === 'ALL' ? 'active' : ''}" data-year="ALL">최근 (작년~현재)</button>
+    <button class="filter-pill ${currentYearFilter === String(latestYear) ? 'active' : ''}" data-year="${latestYear}">${latestYear}년</button>
+    <button class="filter-pill ${currentYearFilter === String(prevYear) ? 'active' : ''}" data-year="${prevYear}">${prevYear}년</button>
+  `;
+}
+
+// Chart Data: 최근 갱신일 기준 작년 1월부터 최근 갱신월까지 표시
+function getChartData() {
+  if (fuelData.length === 0) return [];
+  const latestYear = Math.max(...fuelData.map(d => d.year));
+  const startYear = latestYear - 1;
+
+  if (currentYearFilter === 'ALL') {
+    return fuelData.filter(d => d.year >= startYear);
+  }
+  return fuelData.filter(d => d.year === parseInt(currentYearFilter, 10));
+}
+
+// Table Data
+function getTableData() {
   if (currentYearFilter === 'ALL') return fuelData;
   return fuelData.filter(d => d.year === parseInt(currentYearFilter, 10));
 }
 
 function renderChart() {
   const ctx = document.getElementById('fuelChart').getContext('2d');
-  const filtered = getFilteredData();
+  const filtered = getChartData();
 
   const labels = filtered.map(d => d.period);
   const gasolineData = filtered.map(d => d.gasoline);
@@ -343,7 +369,7 @@ function renderChart() {
 
 function updateChartData() {
   if (!chartInstance) return;
-  const filtered = getFilteredData();
+  const filtered = getChartData();
 
   chartInstance.data.labels = filtered.map(d => d.period);
   chartInstance.data.datasets[0].data = filtered.map(d => d.gasoline);
@@ -355,7 +381,7 @@ function updateChartData() {
 // Render Table
 function renderTable() {
   const query = searchInput.value.trim().toLowerCase();
-  let list = getFilteredData();
+  let list = getTableData();
 
   if (query) {
     list = list.filter(item => 
@@ -457,7 +483,7 @@ function updateModalContent() {
 
 // CSV Export
 function exportToCsv() {
-  const filtered = getFilteredData();
+  const filtered = getTableData();
   if (filtered.length === 0) {
     showToast('저장할 데이터가 없습니다.');
     return;
